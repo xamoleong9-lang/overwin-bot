@@ -1,20 +1,19 @@
-from telegram import Update
-from telegram.ext import Application, CommandHandler, ContextTypes
+from telegram.ext import Updater, CommandHandler
 
 TOKEN = "8413553192:AAHPpz4yyTIP2gKVslqOKzlx2kUYYCMO1q4"
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
+def start(update, context):
+    update.message.reply_text(
         "⚽ OverWin Live Bot ενεργό!\n\n"
-        "Θα λαμβάνεις alerts:\n"
-        "👀 WATCH\n⚠️ READY\n⚽ GOAL ZONE\n\n"
         "Κατάσταση: ΣΥΝΔΕΘΗΚΕ ✔️"
     )
 
 def main():
-    app = Application.builder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.run_polling()
+    updater = Updater(TOKEN, use_context=True)
+    dp = updater.dispatcher
+    dp.add_handler(CommandHandler("start", start))
+    updater.start_polling()
+    updater.idle()
 
 if __name__ == "__main__":
     main()
