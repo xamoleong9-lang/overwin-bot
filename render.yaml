@@ -1,5 +1,5 @@
 services:
-  - type: worker
+  - type: web
     name: overwin-bot
     env: python
     plan: free
